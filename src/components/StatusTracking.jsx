@@ -1,102 +1,132 @@
 import { useState } from 'react';
 
-export default function StatusTracking() {
+export default function StatusTracking({ language }) {
   const [referenceId, setReferenceId] = useState('');
   const [complaintData, setComplaintData] = useState(null);
   const [searched, setSearched] = useState(false);
 
+  const translations = {
+    en: {
+      title: 'Check Status',
+      subtitle: 'Track your complaint status',
+      refLabel: 'Enter Reference ID *',
+      refPlaceholder: 'e.g., SUVIDHA-1234567890',
+      search: '🔍 Search Status',
+      notFound: '❌ No complaint found with this ID',
+      details: 'Complaint Details',
+      refId: 'Reference ID:',
+      name: 'Name:',
+      phone: 'Phone:',
+      consumer: 'Consumer Number:',
+      issueType: 'Issue Type:',
+      date: 'Submitted Date:',
+      status: 'Current Status:',
+      info: 'ℹ️ Your complaint is being reviewed. Expected resolution: 5-7 working days.',
+      searchAnother: '🔄 Search Another',
+      home: '🏠 Go to Home'
+    },
+    hi: {
+      title: 'स्थिति जांचें',
+      subtitle: 'अपनी शिकायत की स्थिति ट्रैक करें',
+      refLabel: 'संदर्भ ID दर्ज करें *',
+      refPlaceholder: 'उदा., SUVIDHA-1234567890',
+      search: '🔍 स्थिति खोजें',
+      notFound: '❌ इस ID के साथ कोई शिकायत नहीं मिली',
+      details: 'शिकायत विवरण',
+      refId: 'संदर्भ ID:',
+      name: 'नाम:',
+      phone: 'फोन:',
+      consumer: 'उपभोक्ता संख्या:',
+      issueType: 'समस्या का प्रकार:',
+      date: 'दर्ज करने की तारीख:',
+      status: 'वर्तमान स्थिति:',
+      info: 'ℹ️ आपकी शिकायत की समीक्षा की जा रही है। अपेक्षित समाधान: 5-7 कार्य दिवस।',
+      searchAnother: '🔄 दूसरी खोजें',
+      home: '🏠 होम पर जाएं'
+    },
+    mr: {
+      title: 'स्थिती तपासा',
+      subtitle: 'आपल्या तक्रारीची स्थिती ट्रॅक करा',
+      refLabel: 'संदर्भ ID दाखल करा *',
+      refPlaceholder: 'उदा., SUVIDHA-1234567890',
+      search: '🔍 स्थिती शोधा',
+      notFound: '❌ या ID सह कोणतीही तक्रार आढळली नाही',
+      details: 'तक्रार तपशील',
+      refId: 'संदर्भ ID:',
+      name: 'नाव:',
+      phone: 'फोन:',
+      consumer: 'ग्राहक क्रमांक:',
+      issueType: 'समस्येचा प्रकार:',
+      date: 'दाखल केलेची तारीख:',
+      status: 'वर्तमान स्थिती:',
+      info: 'ℹ️ आपल्या तक्रारीची समीक्षा केली जात आहे। अपेक्षित निराकरण: 5-7 कार्य दिवस।',
+      searchAnother: '🔄 दुसरा शोधा',
+      home: '🏠 होमला जा'
+    }
+  };
+
+  const t = translations[language];
+
   const handleSearch = (e) => {
     e.preventDefault();
     const data = localStorage.getItem(referenceId);
-    
-    if (data) {
-      setComplaintData(JSON.parse(data));
-    }
+    if (data) setComplaintData(JSON.parse(data));
     setSearched(true);
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 p-4">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 pt-4">
-          <h1 className="text-3xl font-bold text-blue-600">📊 Check Status</h1>
-          <p className="text-gray-600 mt-2">Track your complaint status</p>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%)', padding: '20px', fontFamily: "'Poppins', sans-serif" }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px', marginTop: '30px' }}>
+          <h1 style={{ fontSize: '32px', color: '#667eea', fontWeight: '700', marginBottom: '10px' }}>📊 {t.title}</h1>
+          <p style={{ color: '#666', fontSize: '14px' }}>{t.subtitle}</p>
         </div>
 
         {!complaintData ? (
-          <form onSubmit={handleSearch} className="bg-white rounded-lg shadow-lg p-8">
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Enter Reference ID *
-              </label>
-              <input
-                type="text"
-                value={referenceId}
-                onChange={(e) => setReferenceId(e.target.value)}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g., SUVIDHA-1234567890"
-              />
+          <form onSubmit={handleSearch} style={{ background: 'white', borderRadius: '16px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)', padding: '40px' }}>
+            <div style={{ marginBottom: '25px' }}>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#333', marginBottom: '8px' }}>{t.refLabel}</label>
+              <input type="text" value={referenceId} onChange={(e) => setReferenceId(e.target.value)} required placeholder={t.refPlaceholder} style={{ width: '100%', padding: '12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', fontFamily: "'Poppins', sans-serif", transition: 'all 0.3s' }} onFocus={(e) => { e.target.style.borderColor = '#667eea'; e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)'; }} onBlur={(e) => { e.target.style.borderColor = '#ddd'; e.target.style.boxShadow = 'none'; }} />
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition"
-            >
-              Search Status
-            </button>
+            <button type="submit" style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 25px rgba(102, 126, 234, 0.3)'; }} onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}>{t.search}</button>
 
-            {searched && !complaintData && (
-              <div className="mt-4 p-4 bg-red-50 border border-red-300 rounded-lg text-center">
-                <p className="text-red-600 font-semibold">No complaint found with this ID</p>
-              </div>
-            )}
+            {searched && !complaintData && (<div style={{ marginTop: '20px', padding: '15px', background: '#f8d7da', border: '1px solid #f5c6cb', borderRadius: '8px', textAlign: 'center' }}><p style={{ color: '#721c24', fontWeight: '600', margin: '0' }}>{t.notFound}</p></div>)}
           </form>
         ) : (
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Complaint Details</h2>
-              
-              <div className="space-y-4">
-                <div className="flex justify-between border-b pb-2">
-                  <span className="font-semibold text-gray-600">Reference ID:</span>
-                  <span className="text-gray-800">{complaintData.referenceId}</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span className="font-semibold text-gray-600">Name:</span>
-                  <span className="text-gray-800">{complaintData.name}</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span className="font-semibold text-gray-600">Issue Type:</span>
-                  <span className="text-gray-800 capitalize">{complaintData.issueType}</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span className="font-semibold text-gray-600">Submitted Date:</span>
-                  <span className="text-gray-800">{complaintData.submittedDate}</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span className="font-semibold text-gray-600">Current Status:</span>
-                  <span className="text-yellow-600 font-bold">{complaintData.status}</span>
-                </div>
-              </div>
+          <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)', padding: '40px' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#333', marginBottom: '25px' }}>📋 {t.details}</h2>
+
+            <div style={{ background: '#d1ecf1', borderLeft: '4px solid #0c5460', padding: '25px', borderRadius: '8px', marginBottom: '25px' }}>
+              <DetailRow label={t.refId} value={complaintData.referenceId} isMono />
+              <DetailRow label={t.name} value={complaintData.name} />
+              <DetailRow label={t.phone} value={complaintData.phone} />
+              <DetailRow label={t.consumer} value={complaintData.consumerNumber} />
+              <DetailRow label={t.issueType} value={complaintData.issueType} />
+              <DetailRow label={t.date} value={complaintData.submittedDate} />
+              <DetailRow label={t.status} value={complaintData.status} isStatus isLast />
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg mb-6">
-              <p className="text-gray-600 text-sm">
-                Your complaint is being reviewed. You will receive updates via SMS and Email.
-              </p>
+            <div style={{ background: '#cfe2ff', border: '1px solid #b6d4fe', borderRadius: '8px', padding: '20px', marginBottom: '25px' }}>
+              <p style={{ color: '#084298', fontSize: '13px', lineHeight: '1.6', margin: '0' }}>{t.info}</p>
             </div>
 
-            <button
-              onClick={() => setComplaintData(null)}
-              className="w-full text-blue-600 hover:underline font-semibold py-2"
-            >
-              ← Search Another
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <button onClick={() => { setComplaintData(null); setReferenceId(''); setSearched(false); }} style={{ width: '100%', padding: '12px', background: '#6c757d', color: 'white', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }}>{t.searchAnother}</button>
+              <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '12px', background: '#667eea', color: 'white', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>{t.home}</button>
+            </div>
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value, isMono, isStatus, isLast }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: isLast ? '0' : '12px', marginBottom: isLast ? '0' : '12px', borderBottom: isLast ? 'none' : '1px solid rgba(255,255,255,0.3)' }}>
+      <span style={{ fontWeight: '600', color: '#333', fontSize: '13px' }}>{label}</span>
+      <span style={{ color: '#333', fontSize: '13px', fontFamily: isMono ? 'monospace' : 'inherit', fontWeight: isMono ? '600' : 'normal', background: isMono ? '#fff' : 'transparent', padding: isMono ? '4px 8px' : '0', borderRadius: isMono ? '4px' : '0', color: isStatus ? '#ffc107' : '#333', fontWeight: isStatus ? '700' : 'normal' }}>{value}</span>
     </div>
   );
 }

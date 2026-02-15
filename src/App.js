@@ -8,6 +8,7 @@ import Receipt from './components/Receipt';
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [referenceId, setReferenceId] = useState('');
+  const [language, setLanguage] = useState('en');
 
   const handleNext = (page, id = '') => {
     setCurrentPage(page);
@@ -16,11 +17,21 @@ function App() {
 
   return (
     <div className="App">
-      {currentPage === 'home' && <Home onNext={handleNext} />}
-      {currentPage === 'services' && <ServiceSelection onNext={handleNext} />}
-      {currentPage === 'complaint-form' && <ComplaintForm onNext={handleNext} />}
-      {currentPage === 'status-tracking' && <StatusTracking />}
-      {currentPage === 'receipt' && <Receipt referenceId={referenceId} onNext={handleNext} />}
+      {currentPage === 'home' && (
+        <Home onNext={handleNext} language={language} setLanguage={setLanguage} />
+      )}
+      {currentPage === 'services' && (
+        <ServiceSelection onNext={handleNext} language={language} />
+      )}
+      {currentPage === 'complaint-form' && (
+        <ComplaintForm onNext={handleNext} language={language} />
+      )}
+      {currentPage === 'status-tracking' && (
+        <StatusTracking language={language} />
+      )}
+      {currentPage === 'receipt' && (
+        <Receipt referenceId={referenceId} onNext={handleNext} language={language} />
+      )}
     </div>
   );
 }

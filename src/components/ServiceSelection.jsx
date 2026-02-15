@@ -1,69 +1,123 @@
-export default function ServiceSelection({ onNext }) {
+export default function ServiceSelection({ onNext, language }) {
+  const translations = {
+    en: {
+      title: '⚡ Electricity Services',
+      subtitle: 'Choose a service to continue',
+      back: '← Back to Home',
+      billPayment: 'Bill Payment',
+      billDesc: 'Pay your electricity bill online',
+      complaint: 'File Complaint',
+      complaintDesc: 'Register a complaint about service',
+      connection: 'New Connection',
+      connectionDesc: 'Request new electricity connection',
+      status: 'Check Status',
+      statusDesc: 'Track your request status',
+      continue: 'Continue',
+      underdevelop: '🔧 This feature is under development!\n\nCurrently available:\n✅ File Complaint\n✅ Check Status'
+    },
+    hi: {
+      title: '⚡ बिजली सेवाएं',
+      subtitle: 'जारी रखने के लिए एक सेवा चुनें',
+      back: '← घर जाएं',
+      billPayment: 'बिल भुगतान',
+      billDesc: 'अपने बिजली बिल का ऑनलाइन भुगतान करें',
+      complaint: 'शिकायत दर्ज करें',
+      complaintDesc: 'सेवा के बारे में शिकायत दर्ज करें',
+      connection: 'नया कनेक्शन',
+      connectionDesc: 'नया बिजली कनेक्शन का अनुरोध करें',
+      status: 'स्थिति जांचें',
+      statusDesc: 'अपनी अनुरोध की स्थिति ट्रैक करें',
+      continue: 'जारी रखें',
+      underdevelop: '🔧 यह सुविधा विकास के अधीन है!\n\nवर्तमान में उपलब्ध:\n✅ शिकायत दर्ज करें\n✅ स्थिति जांचें'
+    },
+    mr: {
+      title: '⚡ विजली सेवा',
+      subtitle: 'सेवा निवडा',
+      back: '← घरी जा',
+      billPayment: 'बिल भरणा',
+      billDesc: 'बिजली बिल ऑनलाइन भरा',
+      complaint: 'तक्रार करा',
+      complaintDesc: 'सेवेबाबत तक्रार दाखल करा',
+      connection: 'नवीन जोडणी',
+      connectionDesc: 'नवीन विजली जोडणीची विनंती करा',
+      status: 'स्थिती तपासा',
+      statusDesc: 'तुमच्या विनंतीची स्थिती ट्रॅक करा',
+      continue: 'पुढे जा',
+      underdevelop: '🔧 ही वैशिष्ट्य विकासाधीन आहे!\n\nवर्तमान:\n✅ तक्रार करा\n✅ स्थिती तपासा'
+    }
+  };
+
+  const t = translations[language];
+
   const services = [
-    {
-      id: 'bill-payment',
-      title: '💳 Bill Payment',
-      description: 'Pay your electricity bill online',
-      icon: '💵',
-    },
-    {
-      id: 'complaint',
-      title: '📝 File Complaint',
-      description: 'Register a complaint about service',
-      icon: '⚠️',
-    },
-    {
-      id: 'connection',
-      title: '⚡ New Connection',
-      description: 'Request new electricity connection',
-      icon: '🔌',
-    },
-    {
-      id: 'status',
-      title: '📊 Check Status',
-      description: 'Track your request status',
-      icon: '✅',
-    },
+    { id: 'bill-payment', emoji: '💵', titleKey: 'billPayment', descKey: 'billDesc' },
+    { id: 'complaint', emoji: '⚠️', titleKey: 'complaint', descKey: 'complaintDesc' },
+    { id: 'connection', emoji: '🔌', titleKey: 'connection', descKey: 'connectionDesc' },
+    { id: 'status', emoji: '✅', titleKey: 'status', descKey: 'statusDesc' },
   ];
 
+  const handleServiceClick = (serviceId) => {
+    if (serviceId === 'complaint') onNext('complaint-form');
+    else if (serviceId === 'status') onNext('status-tracking');
+    else alert(t.underdevelop);
+  };
+
   return (
-    <div className="min-h-screen bg-blue-50 p-4">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 pt-4">
-          <h1 className="text-3xl font-bold text-blue-600">⚡ Electricity Services</h1>
-          <p className="text-gray-600 mt-2">Choose a service to continue</p>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%)', padding: '20px', fontFamily: "'Poppins', sans-serif" }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '50px', marginTop: '30px' }}>
+          <h1 style={{ fontSize: '36px', color: '#667eea', fontWeight: '700', marginBottom: '10px' }}>{t.title}</h1>
+          <p style={{ color: '#666', fontSize: '16px', marginTop: '10px' }}>{t.subtitle}</p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px', maxWidth: '1000px', margin: '0 auto 40px' }}>
           {services.map((service) => (
             <button
               key={service.id}
-              onClick={() => {
-                if (service.id === 'complaint') onNext('complaint-form');
-                else if (service.id === 'status') onNext('status-tracking');
-                else alert('🔧 This feature is under development!\n\nCurrently, only "File Complaint" and "Check Status" are available.');
-            }}
-              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105 text-left"
+              onClick={() => handleServiceClick(service.id)}
+              style={{
+                background: 'white',
+                padding: '30px',
+                borderRadius: '16px',
+                boxShadow: '0 5px 20px rgba(0, 0, 0, 0.08)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                border: 'none',
+                textAlign: 'left',
+                fontFamily: "'Poppins', sans-serif",
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.2)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.08)'; }}
             >
-              <div className="text-4xl mb-3">{service.icon}</div>
-              <h3 className="text-xl font-bold text-gray-800">{service.title}</h3>
-              <p className="text-gray-600 text-sm mt-2">{service.description}</p>
-              <div className="mt-4 text-blue-600 font-semibold text-sm">
-                Continue →
-              </div>
+              <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: '50%', opacity: '0.05', pointerEvents: 'none' }} />
+              <div style={{ fontSize: '50px', marginBottom: '15px', display: 'inline-block', backgroundColor: '#f0f4f8', padding: '15px', borderRadius: '12px', lineHeight: '1' }}>{service.emoji}</div>
+              <h3 style={{ fontSize: '22px', color: '#333', marginBottom: '12px', fontWeight: '600', marginTop: '10px' }}>💳 {t[service.titleKey]}</h3>
+              <p style={{ color: '#666', fontSize: '14px', marginBottom: '20px', lineHeight: '1.5' }}>{t[service.descKey]}</p>
+              <div style={{ color: '#667eea', fontWeight: '600', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '5px' }}>Continue <span style={{ fontSize: '16px' }}>→</span></div>
             </button>
           ))}
         </div>
 
-        {/* Back Button */}
-        <div className="mt-8 text-center">
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
           <button
             onClick={() => window.location.reload()}
-            className="text-blue-600 hover:underline font-semibold"
+            style={{
+              background: 'transparent',
+              color: '#667eea',
+              border: 'none',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              padding: '10px 20px',
+              textDecoration: 'underline',
+              transition: 'all 0.3s'
+            }}
+            onMouseEnter={(e) => { e.target.style.color = '#764ba2'; }}
+            onMouseLeave={(e) => { e.target.style.color = '#667eea'; }}
           >
-            ← Back
+            {t.back}
           </button>
         </div>
       </div>
