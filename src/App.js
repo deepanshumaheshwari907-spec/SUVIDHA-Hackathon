@@ -4,6 +4,8 @@ import ServiceSelection from './components/ServiceSelection';
 import ComplaintForm from './components/ComplaintForm';
 import StatusTracking from './components/StatusTracking';
 import Receipt from './components/Receipt';
+import BillPayment from './components/BillPayment';
+import ConsumerDetails from './components/ConsumerDetails';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -32,7 +34,13 @@ function App() {
       {currentPage === 'receipt' && (
         <Receipt referenceId={referenceId} onNext={handleNext} language={language} />
       )}
-    </div>
+      {currentPage === 'bill-payment' && (
+        <BillPayment onNext={handleNext} language={language} />
+        )}
+      {currentPage === 'consumer-details' && (
+        <ConsumerDetails onNext={handleNext} language={language} />
+        )}
+      </div>
   );
 }
 

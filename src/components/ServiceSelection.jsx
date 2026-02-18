@@ -1,126 +1,245 @@
 export default function ServiceSelection({ onNext, language }) {
   const translations = {
     en: {
-      title: '⚡ Electricity Services',
+      title: 'Electricity Services',
       subtitle: 'Choose a service to continue',
       back: '← Back to Home',
       billPayment: 'Bill Payment',
       billDesc: 'Pay your electricity bill online',
       complaint: 'File Complaint',
       complaintDesc: 'Register a complaint about service',
-      connection: 'New Connection',
-      connectionDesc: 'Request new electricity connection',
+      connection: 'Connection Details',
+      connectionDesc: 'View your connection details',
       status: 'Check Status',
       statusDesc: 'Track your request status',
-      continue: 'Continue',
-      underdevelop: '🔧 This feature is under development!\n\nCurrently available:\n✅ File Complaint\n✅ Check Status'
+      continue: 'Continue'
     },
     hi: {
-      title: '⚡ बिजली सेवाएं',
+      title: 'बिजली सेवाएं',
       subtitle: 'जारी रखने के लिए एक सेवा चुनें',
       back: '← घर जाएं',
       billPayment: 'बिल भुगतान',
       billDesc: 'अपने बिजली बिल का ऑनलाइन भुगतान करें',
       complaint: 'शिकायत दर्ज करें',
       complaintDesc: 'सेवा के बारे में शिकायत दर्ज करें',
-      connection: 'नया कनेक्शन',
-      connectionDesc: 'नया बिजली कनेक्शन का अनुरोध करें',
+      connection: 'कनेक्शन विवरण',
+      connectionDesc: 'अपने कनेक्शन विवरण देखें',
       status: 'स्थिति जांचें',
       statusDesc: 'अपनी अनुरोध की स्थिति ट्रैक करें',
-      continue: 'जारी रखें',
-      underdevelop: '🔧 यह सुविधा विकास के अधीन है!\n\nवर्तमान में उपलब्ध:\n✅ शिकायत दर्ज करें\n✅ स्थिति जांचें'
+      continue: 'जारी रखें'
     },
     mr: {
-      title: '⚡ विजली सेवा',
+      title: 'विजली सेवा',
       subtitle: 'सेवा निवडा',
       back: '← घरी जा',
       billPayment: 'बिल भरणा',
       billDesc: 'बिजली बिल ऑनलाइन भरा',
       complaint: 'तक्रार करा',
       complaintDesc: 'सेवेबाबत तक्रार दाखल करा',
-      connection: 'नवीन जोडणी',
-      connectionDesc: 'नवीन विजली जोडणीची विनंती करा',
+      connection: 'जोडणी तपशील',
+      connectionDesc: 'आपल्या जोडणीचे तपशील पहा',
       status: 'स्थिती तपासा',
       statusDesc: 'तुमच्या विनंतीची स्थिती ट्रॅक करा',
-      continue: 'पुढे जा',
-      underdevelop: '🔧 ही वैशिष्ट्य विकासाधीन आहे!\n\nवर्तमान:\n✅ तक्रार करा\n✅ स्थिती तपासा'
+      continue: 'पुढे जा'
     }
   };
 
   const t = translations[language];
 
   const services = [
-    { id: 'bill-payment', emoji: '💵', titleKey: 'billPayment', descKey: 'billDesc' },
-    { id: 'complaint', emoji: '⚠️', titleKey: 'complaint', descKey: 'complaintDesc' },
-    { id: 'connection', emoji: '🔌', titleKey: 'connection', descKey: 'connectionDesc' },
-    { id: 'status', emoji: '✅', titleKey: 'status', descKey: 'statusDesc' },
+    { id: 'bill-payment', emoji: '💳', titleKey: 'billPayment', descKey: 'billDesc', icon: '💰' },
+    { id: 'complaint', emoji: '⚠️', titleKey: 'complaint', descKey: 'complaintDesc', icon: '📝' },
+    { id: 'connection', emoji: '🔌', titleKey: 'connection', descKey: 'connectionDesc', icon: '⚡' },
+    { id: 'status', emoji: '✅', titleKey: 'status', descKey: 'statusDesc', icon: '📊' },
   ];
 
   const handleServiceClick = (serviceId) => {
     if (serviceId === 'complaint') onNext('complaint-form');
     else if (serviceId === 'status') onNext('status-tracking');
-    else alert(t.underdevelop);
+    else if (serviceId === 'bill-payment') onNext('bill-payment');
+    else if (serviceId === 'connection') onNext('consumer-details');
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%)', padding: '20px', fontFamily: "'Poppins', sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px', fontFamily: "'Inter', sans-serif" }}>
+      {/* HEADER - GOVERNMENT OFFICIAL */}
+      <div style={{
+        width: 'calc(100% + 40px)',
+        marginLeft: '-20px',
+        background: 'linear-gradient(90deg, #ff9933 0%, #ffffff 45%, #ffffff 55%, #138808 100%)',
+        padding: '14px 0',
+        marginBottom: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '15px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+      }}>
+        <div style={{ fontSize: '36px' }}>🇮🇳</div>
+        <div style={{ textAlign: 'center', borderLeft: '2px solid #ff9933', borderRight: '2px solid #138808', paddingLeft: '15px', paddingRight: '15px' }}>
+          <p style={{ margin: '0', fontSize: '14px', fontWeight: '700', color: '#1e3a5f' }}>SUVIDHA+</p>
+          <p style={{ margin: '2px 0 0 0', fontSize: '10px', color: '#666' }}>Government of India</p>
+        </div>
+        <div style={{ fontSize: '36px' }}>🇮🇳</div>
+      </div>
+
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '50px', marginTop: '30px' }}>
-          <h1 style={{ fontSize: '36px', color: '#667eea', fontWeight: '700', marginBottom: '10px' }}>{t.title}</h1>
-          <p style={{ color: '#666', fontSize: '16px', marginTop: '10px' }}>{t.subtitle}</p>
+        {/* TITLE SECTION */}
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <h1 style={{
+            fontSize: '40px',
+            color: '#1e3a5f',
+            fontWeight: '800',
+            marginBottom: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px'
+          }}>
+            <span>⚡</span>
+            {t.title}
+          </h1>
+          <p style={{ color: '#666', fontSize: '16px', margin: '0' }}>{t.subtitle}</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px', maxWidth: '1000px', margin: '0 auto 40px' }}>
+        {/* SERVICE CARDS GRID */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '25px',
+          maxWidth: '1100px',
+          margin: '0 auto 40px',
+          marginBottom: '50px'
+        }}>
           {services.map((service) => (
-            <button
-              key={service.id}
-              onClick={() => handleServiceClick(service.id)}
-              style={{
-                background: 'white',
-                padding: '30px',
-                borderRadius: '16px',
-                boxShadow: '0 5px 20px rgba(0, 0, 0, 0.08)',
+            <div key={service.id} style={{
+              background: 'white',
+              padding: '35px 25px',
+              borderRadius: '10px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              border: '2px solid transparent',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = '0 12px 28px rgba(30, 58, 95, 0.15)';
+              e.currentTarget.style.borderColor = '#ff9933';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}
+            onClick={() => handleServiceClick(service.id)}>
+
+              {/* ICON BACKGROUND */}
+              <div style={{
+                fontSize: '60px',
+                marginBottom: '20px',
+                background: '#f0f4f8',
+                width: '90px',
+                height: '90px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '12px',
+                transition: 'all 0.3s ease'
+              }}>
+                {service.emoji}
+              </div>
+
+              {/* SERVICE TITLE */}
+              <h3 style={{
+                fontSize: '20px',
+                color: '#1e3a5f',
+                marginBottom: '10px',
+                fontWeight: '700',
+                marginTop: '0'
+              }}>
+                {t[service.titleKey]}
+              </h3>
+
+              {/* SERVICE DESCRIPTION */}
+              <p style={{
+                color: '#666',
+                fontSize: '14px',
+                marginBottom: '20px',
+                lineHeight: '1.6',
+                margin: '0 0 20px 0'
+              }}>
+                {t[service.descKey]}
+              </p>
+
+              {/* CONTINUE BUTTON */}
+              <button style={{
+                background: 'linear-gradient(90deg, #ff9933 0%, #1e3a5f 100%)',
+                color: 'white',
+                border: 'none',
+                padding: '12px 20px',
+                borderRadius: '6px',
+                fontSize: '14px',
+                fontWeight: '600',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                border: 'none',
-                textAlign: 'left',
-                fontFamily: "'Poppins', sans-serif",
-                position: 'relative',
-                overflow: 'hidden'
+                width: '100%',
+                textTransform: 'uppercase',
+                letterSpacing: '1px'
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.2)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.08)'; }}
-            >
-              <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: '50%', opacity: '0.05', pointerEvents: 'none' }} />
-              <div style={{ fontSize: '50px', marginBottom: '15px', display: 'inline-block', backgroundColor: '#f0f4f8', padding: '15px', borderRadius: '12px', lineHeight: '1' }}>{service.emoji}</div>
-              <h3 style={{ fontSize: '22px', color: '#333', marginBottom: '12px', fontWeight: '600', marginTop: '10px' }}>💳 {t[service.titleKey]}</h3>
-              <p style={{ color: '#666', fontSize: '14px', marginBottom: '20px', lineHeight: '1.5' }}>{t[service.descKey]}</p>
-              <div style={{ color: '#667eea', fontWeight: '600', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '5px' }}>Continue <span style={{ fontSize: '16px' }}>→</span></div>
-            </button>
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'scale(1.05)';
+                e.target.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'scale(1)';
+                e.target.style.boxShadow = 'none';
+              }}>
+                {t.continue} →
+              </button>
+            </div>
           ))}
         </div>
 
+        {/* BACK BUTTON */}
         <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <button
-            onClick={() => window.location.reload()}
-            style={{
-              background: 'transparent',
-              color: '#667eea',
-              border: 'none',
-              fontSize: '16px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              padding: '10px 20px',
-              textDecoration: 'underline',
-              transition: 'all 0.3s'
-            }}
-            onMouseEnter={(e) => { e.target.style.color = '#764ba2'; }}
-            onMouseLeave={(e) => { e.target.style.color = '#667eea'; }}
-          >
+          <button onClick={() => window.location.reload()} style={{
+            background: 'transparent',
+            color: '#1e3a5f',
+            border: '2px solid #1e3a5f',
+            fontSize: '14px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            padding: '12px 30px',
+            borderRadius: '6px',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = '#f0f4f8';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'transparent';
+            e.target.style.transform = 'translateY(0)';
+          }}>
             {t.back}
           </button>
         </div>
       </div>
+
+      <style>{`
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }

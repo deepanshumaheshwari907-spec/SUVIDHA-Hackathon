@@ -88,10 +88,11 @@ export default function Receipt({ referenceId, onNext, language }) {
     const content = `
 ╔════════════════════════════════════════════════════════════╗
 ║          SUVIDHA+ - COMPLAINT RECEIPT                      ║
+║   Smart Urban Civic Services - Government of India         ║
 ╚════════════════════════════════════════════════════════════╝
 
 Reference ID: ${complaintData.referenceId}
-Date: ${complaintData.submittedDate}
+Submitted Date: ${complaintData.submittedDate}
 Name: ${complaintData.name}
 Phone: ${complaintData.phone}
 Consumer: ${complaintData.consumerNumber}
@@ -114,27 +115,27 @@ Government of India - Ministry of Electronics & IT
 
   if (!complaintData) {
     return (
-      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%)', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Poppins', sans-serif" }}>
-        <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)', padding: '40px', maxWidth: '400px', textAlign: 'center' }}>
+      <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif" }}>
+        <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)', padding: '40px', maxWidth: '400px', textAlign: 'center' }}>
           <div style={{ fontSize: '60px', marginBottom: '20px' }}>❌</div>
           <h2 style={{ fontSize: '24px', fontWeight: '700', color: '#dc3545', marginBottom: '15px' }}>{t.error}</h2>
           <p style={{ color: '#666', marginBottom: '25px' }}>{t.errorMsg}</p>
-          <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '12px', background: '#667eea', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>{t.home}</button>
+          <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '12px', background: '#1e3a5f', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>{t.home}</button>
         </div>
       </div>
     );
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%)', padding: '20px', fontFamily: "'Poppins', sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px', fontFamily: "'Inter', sans-serif" }}>
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '30px', marginTop: '30px' }}>
-          <div style={{ fontSize: '80px', marginBottom: '15px' }}>✅</div>
+          <div style={{ fontSize: '80px', marginBottom: '15px', animation: 'celebrate 0.6s ease-out' }}>✅</div>
           <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#28a745', marginBottom: '10px' }}>{t.title}</h1>
           <p style={{ color: '#666', fontSize: '14px' }}>{t.subtitle}</p>
         </div>
 
-        <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)', padding: '35px', marginBottom: '25px' }}>
+        <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)', padding: '35px', marginBottom: '25px' }}>
           <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#333', marginBottom: '25px' }}>📋 {t.receiptDetails}</h2>
 
           <div style={{ background: '#d4edda', borderLeft: '4px solid #28a745', padding: '25px', borderRadius: '8px', marginBottom: '25px' }}>
@@ -159,8 +160,8 @@ Government of India - Ministry of Electronics & IT
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <button onClick={handleDownload} style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 25px rgba(40, 167, 69, 0.3)'; }} onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}>{t.download}</button>
-            <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 25px rgba(102, 126, 234, 0.3)'; }} onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}>{t.home}</button>
+            <button onClick={handleDownload} style={{ width: '100%', padding: '14px', background: '#28a745', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}>{t.download}</button>
+            <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}>{t.home}</button>
             <button onClick={() => { localStorage.clear(); window.location.reload(); }} style={{ width: '100%', padding: '14px', background: '#6c757d', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}>{t.newComplaint}</button>
           </div>
         </div>
@@ -170,6 +171,14 @@ Government of India - Ministry of Electronics & IT
           <p style={{ marginTop: '5px', color: '#999' }}>Smart Urban Civic Services</p>
         </div>
       </div>
+
+      <style>{`
+        @keyframes celebrate {
+          0% { transform: scale(0); opacity: 0; }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
