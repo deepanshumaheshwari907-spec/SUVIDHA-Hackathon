@@ -1,183 +1,143 @@
-import { useState } from 'react';
-
 export default function ConsumerDetails({ onNext, language }) {
   const translations = {
     en: {
-      title: 'Your Connection Details',
-      subtitle: 'View your electricity connection information',
-      consumerNumber: 'Consumer Number',
-      consumerName: 'Name',
-      address: 'Address',
+      title: 'Your Connection',
+      subtitle: 'View your electricity connection details',
+      personal: 'PERSONAL DETAILS',
+      connection: 'CONNECTION DETAILS',
+      billing: 'BILLING DETAILS',
+      consumer: 'Consumer Number',
+      name: 'Name',
       phone: 'Phone',
       email: 'Email',
-      connectionStatus: 'Connection Status',
-      meterNumber: 'Meter Number',
-      connectionDate: 'Connection Date',
-      sanctionedLoad: 'Sanctioned Load',
-      billingCycle: 'Billing Cycle',
-      lastBillDate: 'Last Bill Date',
-      lastBillAmount: 'Last Bill Amount',
-      outstanding: 'Outstanding Amount',
+      address: 'Address',
+      status: 'Status',
+      meter: 'Meter Number',
+      connDate: 'Connection Date',
+      load: 'Sanctioned Load',
+      cycle: 'Billing Cycle',
+      lastBill: 'Last Bill Date',
+      lastAmount: 'Last Amount',
+      outstanding: 'Outstanding',
       active: 'Active',
-      payBill: '💳 Pay Bill',
-      fileComplaint: '📝 File Complaint',
-      back: '← Back'
+      payBill: '💳 PAY BILL',
+      complaint: '📝 FILE COMPLAINT',
+      back: '← BACK'
     },
     hi: {
-      title: 'आपके कनेक्शन विवरण',
-      subtitle: 'अपनी बिजली कनेक्शन जानकारी देखें',
-      consumerNumber: 'उपभोक्ता संख्या',
-      consumerName: 'नाम',
-      address: 'पता',
+      title: 'आपका कनेक्शन',
+      subtitle: 'अपने विद्युत कनेक्शन विवरण देखें',
+      personal: 'व्यक्तिगत विवरण',
+      connection: 'कनेक्शन विवरण',
+      billing: 'बिलिंग विवरण',
+      consumer: 'उपभोक्ता संख्या',
+      name: 'नाम',
       phone: 'फोन',
       email: 'ईमेल',
-      connectionStatus: 'कनेक्शन स्थिति',
-      meterNumber: 'मीटर संख्या',
-      connectionDate: 'कनेक्शन तारीख',
-      sanctionedLoad: 'स्वीकृत लोड',
-      billingCycle: 'बिलिंग चक्र',
-      lastBillDate: 'पिछली बिल तारीख',
-      lastBillAmount: 'पिछली बिल रकम',
-      outstanding: 'बकाया रकम',
+      address: 'पता',
+      status: 'स्थिति',
+      meter: 'मीटर संख्या',
+      connDate: 'कनेक्शन तारीख',
+      load: 'स्वीकृत लोड',
+      cycle: 'बिलिंग चक्र',
+      lastBill: 'पिछली बिल तारीख',
+      lastAmount: 'पिछली राशि',
+      outstanding: 'बकाया',
       active: 'सक्रिय',
       payBill: '💳 बिल भरें',
-      fileComplaint: '📝 शिकायत दर्ज करें',
+      complaint: '📝 शिकायत दर्ज करें',
       back: '← वापस'
     },
     mr: {
-      title: 'आपल्या जोडणीचे तपशील',
-      subtitle: 'आपली वीज जोडणी माहिती पहा',
-      consumerNumber: 'ग्राहक क्रमांक',
-      consumerName: 'नाव',
-      address: 'पता',
+      title: 'आपली जोडणी',
+      subtitle: 'आपली विद्युत जोडणी माहिती पहा',
+      personal: 'व्यक्तिगत तपशील',
+      connection: 'जोडणी तपशील',
+      billing: 'बिलिंग तपशील',
+      consumer: 'ग्राहक क्रमांक',
+      name: 'नाव',
       phone: 'फोन',
       email: 'ईमेल',
-      connectionStatus: 'जोडणी स्थिती',
-      meterNumber: 'मीटर क्रमांक',
-      connectionDate: 'जोडणी तारीख',
-      sanctionedLoad: 'मंजूर भार',
-      billingCycle: 'बिलिंग चक्र',
-      lastBillDate: 'मागील बिल तारीख',
-      lastBillAmount: 'मागील बिल रक्कम',
-      outstanding: 'बाकी रक्कम',
+      address: 'पता',
+      status: 'स्थिती',
+      meter: 'मीटर क्रमांक',
+      connDate: 'जोडणी तारीख',
+      load: 'मंजूर भार',
+      cycle: 'बिलिंग चक्र',
+      lastBill: 'मागील बिल तारीख',
+      lastAmount: 'मागील रक्कम',
+      outstanding: 'बाकी',
       active: 'सक्रिय',
       payBill: '💳 बिल भरा',
-      fileComplaint: '📝 तक्रार करा',
+      complaint: '📝 तक्रार करा',
       back: '← मागे'
     }
   };
 
   const t = translations[language];
 
-  const mockData = {
-    consumerNumber: '1234567890',
-    consumerName: 'Rajesh Kumar',
-    address: '123 Main Street, Indore, MP 452001',
-    phone: '9876543210',
-    email: 'rajesh.kumar@email.com',
-    connectionStatus: 'Active',
-    meterNumber: 'MH-123456',
-    connectionDate: '15 Jan 2020',
-    sanctionedLoad: '2 kW',
-    billingCycle: 'January',
-    lastBillDate: '31 Jan 2026',
-    lastBillAmount: '₹2,100',
-    outstanding: '₹0'
-  };
-
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%)', padding: '20px', fontFamily: "'Poppins', sans-serif" }}>
-      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px', marginTop: '30px' }}>
-          <h1 style={{ fontSize: '32px', color: '#667eea', fontWeight: '700', marginBottom: '10px' }}>⚡ {t.title}</h1>
-          <p style={{ color: '#666', fontSize: '14px' }}>{t.subtitle}</p>
+    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '0', fontFamily: "'Inter', sans-serif" }}>
+      {/* HEADER */}
+      <div style={{ background: 'linear-gradient(90deg, #ff9933 0%, #ffffff 45%, #ffffff 55%, #138808 100%)', padding: '16px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', boxShadow: '0 6px 16px rgba(0, 0, 0, 0.12)', marginBottom: '40px' }}>
+        <div style={{ fontSize: '40px' }}>🇮🇳</div>
+        <div style={{ textAlign: 'center', borderLeft: '3px solid #ff9933', borderRight: '3px solid #138808', paddingLeft: '15px', paddingRight: '15px' }}>
+          <p style={{ margin: '0', fontSize: '16px', fontWeight: '800', color: '#1e3a5f' }}>SUVIDHA+</p>
+          <p style={{ margin: '3px 0 0 0', fontSize: '11px', color: '#666' }}>Government of India</p>
+        </div>
+        <div style={{ fontSize: '40px' }}>🇮🇳</div>
+      </div>
+
+      <div style={{ maxWidth: '700px', margin: '0 auto', padding: '0 20px 60px 20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h1 style={{ fontSize: '36px', color: '#1e3a5f', fontWeight: '800', marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <span>⚡</span>
+            {t.title}
+          </h1>
+          <p style={{ color: '#666', fontSize: '14px', margin: '0' }}>{t.subtitle}</p>
         </div>
 
-        <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)', padding: '40px' }}>
+        <div style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 6px 20px rgba(0, 0, 0, 0.08)' }}>
           
-          {/* Status Card */}
-          <div style={{ background: '#d4edda', border: '2px solid #28a745', borderRadius: '12px', padding: '20px', marginBottom: '30px', textAlign: 'center' }}>
-            <p style={{ fontSize: '12px', color: '#155724', marginBottom: '5px' }}>{t.connectionStatus}</p>
-            <p style={{ fontSize: '24px', fontWeight: '700', color: '#28a745' }}>✅ {t.active}</p>
+          {/* STATUS CARD */}
+          <div style={{ background: '#d4edda', border: '2px solid #28a745', padding: '20px', textAlign: 'center' }}>
+            <p style={{ margin: '0', fontSize: '12px', color: '#155724', fontWeight: '600' }}>{t.status}</p>
+            <p style={{ margin: '6px 0 0 0', fontSize: '20px', fontWeight: '800', color: '#28a745' }}>✅ {t.active}</p>
           </div>
 
-          {/* Personal Details */}
-          <div style={{ marginBottom: '30px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#333', marginBottom: '15px', paddingBottom: '10px', borderBottom: '2px solid #ddd' }}>👤 Personal Details</h3>
-            <DetailRow label={t.consumerNumber} value={mockData.consumerNumber} />
-            <DetailRow label={t.consumerName} value={mockData.consumerName} />
-            <DetailRow label={t.phone} value={mockData.phone} />
-            <DetailRow label={t.email} value={mockData.email} />
-            <DetailRow label={t.address} value={mockData.address} isLast />
-          </div>
+          {/* CONTENT */}
+          <div style={{ padding: '30px' }}>
+            
+            {/* PERSONAL */}
+            <Section title={t.personal} items={[
+              { label: t.consumer, value: '1234567890' },
+              { label: t.name, value: 'Rajesh Kumar' },
+              { label: t.phone, value: '9876543210' },
+              { label: t.email, value: 'rajesh@email.com' },
+              { label: t.address, value: '123 Main Street, Indore' }
+            ]} />
 
-          {/* Connection Details */}
-          <div style={{ marginBottom: '30px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#333', marginBottom: '15px', paddingBottom: '10px', borderBottom: '2px solid #ddd' }}>🔌 Connection Details</h3>
-            <DetailRow label={t.meterNumber} value={mockData.meterNumber} />
-            <DetailRow label={t.connectionDate} value={mockData.connectionDate} />
-            <DetailRow label={t.sanctionedLoad} value={mockData.sanctionedLoad} isLast />
-          </div>
+            {/* CONNECTION */}
+            <Section title={t.connection} items={[
+              { label: t.meter, value: 'MH-123456' },
+              { label: t.connDate, value: '15 Jan 2020' },
+              { label: t.load, value: '2 kW' }
+            ]} />
 
-          {/* Billing Details */}
-          <div style={{ marginBottom: '30px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#333', marginBottom: '15px', paddingBottom: '10px', borderBottom: '2px solid #ddd' }}>📊 Billing Details</h3>
-            <DetailRow label={t.billingCycle} value={mockData.billingCycle} />
-            <DetailRow label={t.lastBillDate} value={mockData.lastBillDate} />
-            <DetailRow label={t.lastBillAmount} value={mockData.lastBillAmount} />
-            <DetailRow label={t.outstanding} value={mockData.outstanding} isLast />
-          </div>
+            {/* BILLING */}
+            <Section title={t.billing} items={[
+              { label: t.cycle, value: 'January' },
+              { label: t.lastBill, value: '31 Jan 2026' },
+              { label: t.lastAmount, value: '₹2,100' },
+              { label: t.outstanding, value: '₹0' }
+            ]} />
 
-          {/* Action Buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <button
-              onClick={() => window.location.reload()}
-              style={{
-                width: '100%',
-                padding: '14px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
-            >
-              {t.payBill}
-            </button>
-            <button
-              onClick={() => window.location.reload()}
-              style={{
-                width: '100%',
-                padding: '14px',
-                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
-            >
-              {t.fileComplaint}
-            </button>
-            <button
-              onClick={() => window.location.reload()}
-              style={{
-                width: '100%',
-                padding: '12px',
-                background: 'transparent',
-                color: '#667eea',
-                border: '2px solid #667eea',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
-            >
-              {t.back}
-            </button>
+            {/* BUTTONS */}
+            <div style={{ display: 'flex', gap: '12px', marginTop: '25px' }}>
+              <button onClick={() => window.location.reload()} style={{ flex: 1, padding: '14px', background: 'linear-gradient(90deg, #ff9933 0%, #1e3a5f 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.payBill}</button>
+              <button onClick={() => window.location.reload()} style={{ flex: 1, padding: '14px', background: 'linear-gradient(90deg, #28a745 0%, #20c997 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.complaint}</button>
+            </div>
+            <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '12px', background: 'transparent', color: '#1e3a5f', border: '2px solid #1e3a5f', borderRadius: '8px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', marginTop: '12px', textTransform: 'uppercase' }}>{t.back}</button>
           </div>
         </div>
       </div>
@@ -185,17 +145,16 @@ export default function ConsumerDetails({ onNext, language }) {
   );
 }
 
-function DetailRow({ label, value, isLast }) {
+function Section({ title, items }) {
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '12px 0',
-      borderBottom: isLast ? 'none' : '1px solid #eee',
-      alignItems: 'center'
-    }}>
-      <span style={{ fontSize: '13px', color: '#666', fontWeight: '500' }}>{label}:</span>
-      <span style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>{value}</span>
+    <div style={{ marginBottom: '25px' }}>
+      <h3 style={{ fontSize: '12px', fontWeight: '800', color: '#1e3a5f', marginBottom: '12px', paddingBottom: '10px', borderBottom: '2px solid #e0e0e0', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 15px 0' }}>{title}</h3>
+      {items.map((item, i) => (
+        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '10px', marginBottom: '10px', borderBottom: i === items.length - 1 ? 'none' : '1px solid #eee' }}>
+          <span style={{ fontSize: '12px', color: '#666', fontWeight: '500' }}>{item.label}:</span>
+          <span style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>{item.value}</span>
+        </div>
+      ))}
     </div>
   );
 }

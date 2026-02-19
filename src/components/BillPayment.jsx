@@ -3,115 +3,76 @@ import { BeatLoader } from 'react-spinners';
 
 export default function BillPayment({ onNext, language }) {
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [showPaymentGateway, setShowPaymentGateway] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
   const [otp, setOtp] = useState('');
   const [processing, setProcessing] = useState(false);
   const [completed, setCompleted] = useState(false);
 
   const translations = {
     en: {
-      title: 'Pay Electricity Bill',
-      billAmount: 'Bill Amount',
+      title: 'Pay Your Bill',
+      amount: 'Amount Due',
       dueDate: 'Due Date',
-      consumerNumber: 'Consumer Number',
-      consumerName: 'Name',
-      address: 'Address',
-      billingCycle: 'Billing Cycle',
-      lastAmount: 'Last Bill Amount',
-      selectPayment: 'Select Payment Method',
+      consumer: 'Consumer',
+      selectPayment: 'SELECT PAYMENT METHOD',
       upi: 'UPI',
-      debitCard: 'Debit Card',
-      netBanking: 'Net Banking',
-      wallet: 'Digital Wallet',
-      payNow: '💳 Pay Now',
-      back: '← Back',
-      gatewayTitle: 'Enter Payment Details',
-      otpLabel: 'Enter OTP sent to your phone',
-      otpPlaceholder: '6-digit OTP',
-      verify: '✅ Verify & Pay',
-      selectMethod: 'Please select a payment method first',
+      card: 'Debit Card',
+      netbank: 'Net Banking',
+      wallet: 'Wallet',
+      payNow: '💳 PROCEED TO PAYMENT',
+      verify: '✓ VERIFY & PAY',
+      back: '← BACK',
+      otp: 'Enter OTP',
+      demoOtp: 'Demo OTP: 123456',
       success: 'Payment Successful!',
-      receipt: 'Payment receipt sent to email',
-      newPayment: 'Make Another Payment',
-      demoOtp: 'Demo OTP: 123456'
+      receipt: 'Receipt sent to email',
+      newPayment: 'Make Another Payment'
     },
     hi: {
-      title: 'बिजली का बिल भरें',
-      billAmount: 'बिल की रकम',
+      title: 'अपने बिल का भुगतान करें',
+      amount: 'बकाया राशि',
       dueDate: 'अंतिम तारीख',
-      consumerNumber: 'उपभोक्ता संख्या',
-      consumerName: 'नाम',
-      address: 'पता',
-      billingCycle: 'बिलिंग चक्र',
-      lastAmount: 'पिछला बिल',
+      consumer: 'उपभोक्ता',
       selectPayment: 'भुगतान विधि चुनें',
       upi: 'यूपीआई',
-      debitCard: 'डेबिट कार्ड',
-      netBanking: 'नेट बैंकिंग',
-      wallet: 'डिजिटल वॉलेट',
-      payNow: '💳 अभी भरें',
+      card: 'डेबिट कार्ड',
+      netbank: 'नेट बैंकिंग',
+      wallet: 'वॉलेट',
+      payNow: '💳 भुगतान जारी रखें',
+      verify: '✓ सत्यापित करें & भरें',
       back: '← वापस',
-      gatewayTitle: 'भुगतान विवरण दर्ज करें',
-      otpLabel: 'अपने फोन पर भेजे गए OTP दर्ज करें',
-      otpPlaceholder: '6 अंकों का OTP',
-      verify: '✅ सत्यापित करें & भरें',
-      selectMethod: 'पहले भुगतान विधि चुनें',
+      otp: 'OTP दर्ज करें',
+      demoOtp: 'Demo OTP: 123456',
       success: 'भुगतान सफल!',
-      receipt: 'भुगतान रसीद ईमेल पर भेजी गई',
-      newPayment: 'अन्य भुगतान करें',
-      demoOtp: 'Demo OTP: 123456'
+      receipt: 'रसीद ईमेल पर भेजी गई',
+      newPayment: 'अन्य भुगतान करें'
     },
     mr: {
-      title: 'वीज बिल भरा',
-      billAmount: 'बिलाची रक्कम',
-      dueDate: 'शेवटची तारीख',
-      consumerNumber: 'ग्राहक क्रमांक',
-      consumerName: 'नाव',
-      address: 'पता',
-      billingCycle: 'बिलिंग चक्र',
-      lastAmount: 'मागील बिल',
+      title: 'आपल्या बिलाचा भुगतान करा',
+      amount: 'बाकी रक्कम',
+      dueDate: 'अंतिम तारीख',
+      consumer: 'ग्राहक',
       selectPayment: 'भुगतान पद्धती निवडा',
       upi: 'यूपीआई',
-      debitCard: 'डेबिट कार्ड',
-      netBanking: 'नेट बँकिंग',
-      wallet: 'डिजिटल वॉलेट',
-      payNow: '💳 आता भरा',
+      card: 'डेबिट कार्ड',
+      netbank: 'नेट बँकिंग',
+      wallet: 'वॉलेट',
+      payNow: '💳 भुगतान सुरू करा',
+      verify: '✓ सत्यापित करा & भरा',
       back: '← मागे',
-      gatewayTitle: 'भुगतान तपशील दाखल करा',
-      otpLabel: 'आपल्या फोनवर पाठवलेला OTP दाखल करा',
-      otpPlaceholder: '6 अंकांचा OTP',
-      verify: '✅ सत्यापित करा & भरा',
-      selectMethod: 'पहिले भुगतान पद्धती निवडा',
+      otp: 'OTP दाखल करा',
+      demoOtp: 'Demo OTP: 123456',
       success: 'भुगतान यशस्वी!',
-      receipt: 'भुगतान रसीद ईमेलवर पाठवली',
-      newPayment: 'इतर भुगतान करा',
-      demoOtp: 'Demo OTP: 123456'
+      receipt: 'रसीद ईमेलवर पाठवली',
+      newPayment: 'इतर भुगतान करा'
     }
   };
 
   const t = translations[language];
 
-  const mockBillData = {
-    consumerNumber: '1234567890',
-    consumerName: 'Rajesh kumar',
-    address: '123 Main Street, Indore, MP 452001',
-    billAmount: 2450,
-    dueDate: '25 Feb 2026',
-    billingCycle: 'January 2026',
-    lastAmount: 2100
-  };
-
-  const handlePayment = () => {
-    if (!paymentMethod) {
-      alert(t.selectMethod);
-      return;
-    }
-    setShowPaymentGateway(true);
-  };
-
-  const handleVerifyOTP = () => {
+  const handleVerify = () => {
     if (otp.length !== 6) {
-      alert('OTP must be 6 digits');
+      alert('Enter 6-digit OTP');
       return;
     }
     setProcessing(true);
@@ -121,172 +82,141 @@ export default function BillPayment({ onNext, language }) {
     }, 2000);
   };
 
-  // SUCCESS PAGE
   if (completed) {
     return (
-      <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif" }}>
-        <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)', padding: '40px', maxWidth: '400px', textAlign: 'center' }}>
-          <div style={{ fontSize: '70px', marginBottom: '20px', animation: 'celebrate 0.6s ease-out' }}>✅</div>
-          <h2 style={{ fontSize: '24px', fontWeight: '700', color: '#28a745', marginBottom: '10px' }}>{t.success}</h2>
-          <p style={{ color: '#666', marginBottom: '25px' }}>{t.receipt}</p>
-          <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '12px', background: '#1e3a5f', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>{t.newPayment}</button>
+      <div style={{ minHeight: '100vh', background: '#f5f7fa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: '20px' }}>
+        <div style={{ background: 'white', borderRadius: '12px', padding: '50px 40px', textAlign: 'center', maxWidth: '500px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)', border: '3px solid #28a745' }}>
+          <div style={{ fontSize: '80px', marginBottom: '20px', animation: 'celebrate 0.6s ease-out' }}>✅</div>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#155724', marginBottom: '15px' }}>{t.success}</h2>
+          <p style={{ color: '#155724', marginBottom: '25px' }}>{t.receipt}</p>
+          <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '14px', background: '#1e3a5f', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase' }}>{t.newPayment}</button>
         </div>
       </div>
     );
   }
 
-  // OTP GATEWAY PAGE
-  if (showPaymentGateway) {
+  if (showOTP) {
     return (
-      <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif" }}>
-        <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)', padding: '40px', maxWidth: '500px', width: '100%' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: '700', color: '#1e3a5f', marginBottom: '30px', textAlign: 'center' }}>{t.gatewayTitle}</h2>
-
-          {/* Payment Summary */}
-          <div style={{ background: '#e7f3ff', border: '2px solid #1e3a5f', borderRadius: '10px', padding: '20px', marginBottom: '30px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-              <span style={{ fontWeight: '600', color: '#333' }}>{t.billAmount}:</span>
-              <span style={{ fontWeight: '700', color: '#1e3a5f', fontSize: '18px' }}>₹{mockBillData.billAmount}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontWeight: '600', color: '#333' }}>{t.consumerNumber}:</span>
-              <span style={{ fontWeight: '600', color: '#333' }}>{mockBillData.consumerNumber}</span>
-            </div>
-          </div>
-
-          {/* Payment Method Display */}
-          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', marginBottom: '20px', textAlign: 'center' }}>
-            <p style={{ fontSize: '12px', color: '#666', margin: '0 0 5px 0' }}>Payment Method</p>
-            <p style={{ fontSize: '16px', fontWeight: '600', color: '#333', margin: '0' }}>
-              {paymentMethod === 'upi' && '📱 UPI'}
-              {paymentMethod === 'debit' && '💳 Debit Card'}
-              {paymentMethod === 'netbanking' && '🏦 Net Banking'}
-              {paymentMethod === 'wallet' && '💰 Digital Wallet'}
-            </p>
-          </div>
-
-          {/* OTP Input */}
-          <div style={{ marginBottom: '25px' }}>
-            <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#333', marginBottom: '8px' }}>{t.otpLabel}</label>
-            <input 
-              type="text" 
-              value={otp} 
-              onChange={(e) => setOtp(e.target.value.slice(0, 6))}
-              placeholder={t.otpPlaceholder}
-              maxLength="6"
-              style={{ width: '100%', padding: '12px', border: '2px solid #1e3a5f', borderRadius: '8px', fontSize: '18px', fontWeight: '600', textAlign: 'center', letterSpacing: '10px', fontFamily: 'monospace' }}
-            />
-            <p style={{ fontSize: '12px', color: '#999', marginTop: '8px' }}>{t.demoOtp}</p>
-          </div>
-
-          {/* Verify Button */}
+      <div style={{ minHeight: '100vh', background: '#f5f7fa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: '20px' }}>
+        <div style={{ background: 'white', borderRadius: '12px', padding: '40px', maxWidth: '500px', width: '100%', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)' }}>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#1e3a5f', marginBottom: '30px', textAlign: 'center' }}>🔐 {t.otp}</h2>
+          <input
+            type="text"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value.slice(0, 6))}
+            maxLength="6"
+            placeholder="000000"
+            style={{
+              width: '100%',
+              padding: '16px',
+              border: '2px solid #ddd',
+              borderRadius: '8px',
+              fontSize: '24px',
+              textAlign: 'center',
+              fontWeight: '700',
+              letterSpacing: '15px',
+              fontFamily: 'monospace',
+              marginBottom: '10px',
+              boxSizing: 'border-box'
+            }}
+          />
+          <p style={{ fontSize: '12px', color: '#999', textAlign: 'center', marginBottom: '25px' }}>{t.demoOtp}</p>
           {processing ? (
-            <div style={{ width: '100%', padding: '15px', background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%)', color: 'white', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '10px' }}>
+            <div style={{ width: '100%', padding: '14px', background: 'linear-gradient(90deg, #ff9933 0%, #1e3a5f 100%)', color: 'white', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
               <BeatLoader color="white" size={10} />
-              <span>Processing...</span>
             </div>
           ) : (
-            <button onClick={handleVerifyOTP} style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', marginBottom: '10px' }}>
-              {t.verify}
-            </button>
+            <>
+              <button onClick={handleVerify} style={{ width: '100%', padding: '14px', background: 'linear-gradient(90deg, #ff9933 0%, #1e3a5f 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.verify}</button>
+              <button onClick={() => setShowOTP(false)} style={{ width: '100%', padding: '12px', background: 'transparent', color: '#1e3a5f', border: '2px solid #1e3a5f', borderRadius: '8px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase' }}>{t.back}</button>
+            </>
           )}
-
-          {/* Back Button */}
-          <button onClick={() => setShowPaymentGateway(false)} style={{ width: '100%', padding: '12px', background: 'transparent', color: '#1e3a5f', border: '2px solid #1e3a5f', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
-            {t.back}
-          </button>
         </div>
       </div>
     );
   }
 
-  // MAIN BILL PAYMENT PAGE
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px', fontFamily: "'Inter', sans-serif" }}>
-      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px', marginTop: '30px' }}>
-          <h1 style={{ fontSize: '32px', color: '#1e3a5f', fontWeight: '700', marginBottom: '10px' }}>💳 {t.title}</h1>
+    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '0', fontFamily: "'Inter', sans-serif" }}>
+      {/* HEADER */}
+      <div style={{ background: 'linear-gradient(90deg, #ff9933 0%, #ffffff 45%, #ffffff 55%, #138808 100%)', padding: '16px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', boxShadow: '0 6px 16px rgba(0, 0, 0, 0.12)', marginBottom: '40px' }}>
+        <div style={{ fontSize: '40px' }}>🇮🇳</div>
+        <div style={{ textAlign: 'center', borderLeft: '3px solid #ff9933', borderRight: '3px solid #138808', paddingLeft: '15px', paddingRight: '15px' }}>
+          <p style={{ margin: '0', fontSize: '16px', fontWeight: '800', color: '#1e3a5f' }}>SUVIDHA+</p>
+          <p style={{ margin: '3px 0 0 0', fontSize: '11px', color: '#666' }}>Government of India</p>
+        </div>
+        <div style={{ fontSize: '40px' }}>🇮🇳</div>
+      </div>
+
+      <div style={{ maxWidth: '700px', margin: '0 auto', padding: '0 20px 60px 20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h1 style={{ fontSize: '36px', color: '#1e3a5f', fontWeight: '800', marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <span>💳</span>
+            {t.title}
+          </h1>
         </div>
 
-        <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)', padding: '40px' }}>
-          {/* Bill Details */}
-          <div style={{ background: '#e7f3ff', border: '2px solid #1e3a5f', borderRadius: '12px', padding: '25px', marginBottom: '30px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
-              <div>
-                <p style={{ fontSize: '12px', color: '#666', marginBottom: '5px' }}>{t.billAmount}</p>
-                <p style={{ fontSize: '28px', fontWeight: '700', color: '#1e3a5f' }}>₹{mockBillData.billAmount}</p>
-              </div>
-              <div>
-                <p style={{ fontSize: '12px', color: '#666', marginBottom: '5px' }}>{t.dueDate}</p>
-                <p style={{ fontSize: '18px', fontWeight: '600', color: '#dc3545' }}>{mockBillData.dueDate}</p>
-              </div>
+        <div style={{ background: 'white', borderRadius: '12px', padding: '40px', boxShadow: '0 6px 20px rgba(0, 0, 0, 0.08)', border: '2px solid #e8eef7' }}>
+          
+          {/* BILL DETAILS */}
+          <div style={{ background: '#e7f3ff', border: '2px solid #1e3a5f', borderRadius: '10px', padding: '25px', marginBottom: '30px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div>
+              <p style={{ fontSize: '12px', color: '#666', fontWeight: '600', margin: '0 0 6px 0' }}>{t.amount}</p>
+              <p style={{ fontSize: '28px', fontWeight: '800', color: '#1e3a5f', margin: '0' }}>₹2,450</p>
             </div>
-
-            <hr style={{ border: 'none', borderTop: '1px solid #ddd', margin: '20px 0' }} />
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-              <div>
-                <p style={{ fontSize: '12px', color: '#666', marginBottom: '5px' }}>{t.consumerNumber}</p>
-                <p style={{ fontSize: '14px', fontWeight: '600', color: '#333' }}>{mockBillData.consumerNumber}</p>
-              </div>
-              <div>
-                <p style={{ fontSize: '12px', color: '#666', marginBottom: '5px' }}>{t.consumerName}</p>
-                <p style={{ fontSize: '14px', fontWeight: '600', color: '#333' }}>{mockBillData.consumerName}</p>
-              </div>
-              <div>
-                <p style={{ fontSize: '12px', color: '#666', marginBottom: '5px' }}>{t.billingCycle}</p>
-                <p style={{ fontSize: '14px', fontWeight: '600', color: '#333' }}>{mockBillData.billingCycle}</p>
-              </div>
-              <div>
-                <p style={{ fontSize: '12px', color: '#666', marginBottom: '5px' }}>{t.lastAmount}</p>
-                <p style={{ fontSize: '14px', fontWeight: '600', color: '#333' }}>₹{mockBillData.lastAmount}</p>
-              </div>
+            <div>
+              <p style={{ fontSize: '12px', color: '#666', fontWeight: '600', margin: '0 0 6px 0' }}>{t.dueDate}</p>
+              <p style={{ fontSize: '16px', fontWeight: '700', color: '#dc3545', margin: '0' }}>25 Feb 2026</p>
             </div>
-
-            <p style={{ fontSize: '12px', color: '#666', marginTop: '20px', marginBottom: '5px' }}>{t.address}</p>
-            <p style={{ fontSize: '13px', fontWeight: '500', color: '#333', margin: '0' }}>{mockBillData.address}</p>
-          </div>
-
-          {/* Payment Methods */}
-          <div style={{ marginBottom: '30px' }}>
-            <label style={{ display: 'block', fontSize: '16px', fontWeight: '600', color: '#333', marginBottom: '15px' }}>{t.selectPayment}</label>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              {[
-                { id: 'upi', label: t.upi, icon: '📱' },
-                { id: 'debit', label: t.debitCard, icon: '💳' },
-                { id: 'netbanking', label: t.netBanking, icon: '🏦' },
-                { id: 'wallet', label: t.wallet, icon: '💰' }
-              ].map((method) => (
-                <button
-                  key={method.id}
-                  onClick={() => setPaymentMethod(method.id)}
-                  style={{
-                    padding: '15px',
-                    border: paymentMethod === method.id ? '2px solid #1e3a5f' : '2px solid #ddd',
-                    background: paymentMethod === method.id ? '#f0f4f8' : 'white',
-                    borderRadius: '10px',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s',
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#333'
-                  }}
-                >
-                  <div style={{ fontSize: '24px', marginBottom: '5px' }}>{method.icon}</div>
-                  {method.label}
-                </button>
-              ))}
+            <div style={{ gridColumn: '1 / -1' }}>
+              <p style={{ fontSize: '12px', color: '#666', fontWeight: '600', margin: '0 0 6px 0' }}>{t.consumer}</p>
+              <p style={{ fontSize: '14px', fontWeight: '600', color: '#333', margin: '0' }}>1234567890</p>
             </div>
           </div>
 
-          {/* Pay Button */}
-          <button onClick={handlePayment} style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', marginBottom: '10px' }}>
+          {/* PAYMENT METHODS */}
+          <p style={{ fontSize: '13px', fontWeight: '800', color: '#1e3a5f', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.selectPayment}</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '30px' }}>
+            {[
+              { id: 'upi', label: t.upi, icon: '📱' },
+              { id: 'card', label: t.card, icon: '💳' },
+              { id: 'net', label: t.netbank, icon: '🏦' },
+              { id: 'wallet', label: t.wallet, icon: '💰' }
+            ].map((m) => (
+              <button
+                key={m.id}
+                onClick={() => setPaymentMethod(m.id)}
+                style={{
+                  padding: '15px',
+                  border: paymentMethod === m.id ? '3px solid #ff9933' : '2px solid #ddd',
+                  background: paymentMethod === m.id ? '#fff8f0' : 'white',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  color: '#333',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => { if (paymentMethod !== m.id) { e.target.style.borderColor = '#ff9933'; e.target.style.background = '#fff8f0'; } }}
+                onMouseLeave={(e) => { if (paymentMethod !== m.id) { e.target.style.borderColor = '#ddd'; e.target.style.background = 'white'; } }}
+              >
+                <div style={{ fontSize: '24px', marginBottom: '6px' }}>{m.icon}</div>
+                {m.label}
+              </button>
+            ))}
+          </div>
+
+          {/* BUTTONS */}
+          <button
+            onClick={() => paymentMethod ? setShowOTP(true) : alert('Select payment method')}
+            style={{ width: '100%', padding: '14px', background: 'linear-gradient(90deg, #ff9933 0%, #1e3a5f 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}
+          >
             {t.payNow}
           </button>
-
-          {/* Back Button */}
-          <button onClick={() => window.location.reload()} style={{ width: '100%', padding: '12px', background: 'transparent', color: '#1e3a5f', border: '2px solid #1e3a5f', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+          <button
+            onClick={() => window.location.reload()}
+            style={{ width: '100%', padding: '12px', background: 'transparent', color: '#1e3a5f', border: '2px solid #1e3a5f', borderRadius: '8px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase' }}
+          >
             {t.back}
           </button>
         </div>
